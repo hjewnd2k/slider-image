@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silder image</title>
+    <style>
+        p img {
+            border: 1px solid white;
+        }
+
+        p img:hover {
+            border: 1px solid red;
+            cursor: pointer;
+        }
+        p img.active {
+            border: 1px solid red;
+        }
+
+        span.next {position: absolute;right: calc(50% + 50px);}
+
+        .silder span {
+            display: block;
+            width: 90px;
+            height: 45px;
+            background: #ccc;
+            color: #fff;
+            z-index: 10000;
+            text-decoration: none;
+            align-items: center;
+            line-height: 45px;
+            cursor: pointer;
+        }
+
+        .silder {display: flex;align-items: center;width: 50%;/* justify-content: center; */}
+
+        span.prev {position: absolute;left: 8px;}
+    </style>
+</head>
+<body>
+    <div>
+        <div class="silder">
+            <img src="./mienque1.jpg" width="700" height="400" alt="" id="main-img">
+            <span href="" class="next">Next</span>
+            <span href="" class="prev">Prev</span>
+        </div>
+        <p>
+            <img src="./mienque1.jpg" alt="" width="90" height="65" class="img1 active">
+            <img src="./mienque2.jpg" alt="" width="90" height="65" class="img2">
+            <img src="./mienque3.jpg" alt="" width="90" height="65" class="img3">
+            <img src="./mienque4.jpg" alt="" width="90" height="65" class="img4">
+        </p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(() => {
+            let index = 1
+            $('.next').click(function(){
+                index++
+                if (index > 4)
+                    index = 1
+                console.log(index)
+                let imgPath = $(`.img${index}`).attr('src')
+                $('p img').removeClass('active')
+                $(`.img${index}`).addClass('active')
+                $('#main-img').attr('src', imgPath)
+            })
+            $('p img').click(function() {
+                $('p img').removeClass('active')
+                let imgPath = $(this).attr('src')
+                $(this).addClass('active')
+                $('#main-img').attr('src', imgPath)
+            })
+        })
+    </script>
+</body>
+</html>
